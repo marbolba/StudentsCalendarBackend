@@ -3,7 +3,6 @@ version: '3'
 services:
   dbPostgres:
     image: postgres
-    restart: always
     environment:
       POSTGRES_USER: root
       POSTGRES_PASSWORD: password
@@ -13,6 +12,5 @@ services:
 
   adminer:
     image: adminer
-    restart: always
     ports:
-      - "8080:8080"
+      - "4242:8080"
