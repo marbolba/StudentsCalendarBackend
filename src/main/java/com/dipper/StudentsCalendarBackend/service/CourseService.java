@@ -13,8 +13,8 @@ public class CourseService {
   @Autowired
   private CourseRepository courseRepository;
 
-  public void addCourse(CourseEntity courseEntity){
-    courseRepository.save(courseEntity);
+  public CourseEntity addCourse(CourseEntity courseEntity){
+    return courseRepository.save(courseEntity);
   }
   public List<CourseEntity> getCourses(){
     return courseRepository.findAll();
