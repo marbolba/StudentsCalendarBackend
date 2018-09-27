@@ -70,15 +70,6 @@ public class ClassesService {
       //iterate
       currentProcessedDate.set(Calendar.WEEK_OF_YEAR,currentProcessedDate.get(Calendar.WEEK_OF_YEAR)+1);
     }
-
-    /*
-    *
-      System.out.println(endDate.getTime());
-      endDate.set(Calendar.DAY_OF_WEEK,newCourse.getCourseDay());
-      System.out.println(endDate.getTime());
-      endDate.set(Calendar.WEEK_OF_YEAR,endDate.get(Calendar.WEEK_OF_YEAR)+1);
-    System.out.println(endDate.getTime());
-    * */
     return true;
   }
 }

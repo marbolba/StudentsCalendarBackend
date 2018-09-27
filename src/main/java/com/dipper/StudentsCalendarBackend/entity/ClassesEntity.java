@@ -11,6 +11,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "Classes")
 public class ClassesEntity {
+
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id", updatable = false, nullable = false)

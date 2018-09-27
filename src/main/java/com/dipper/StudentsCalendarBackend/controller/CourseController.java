@@ -28,7 +28,7 @@ public class CourseController {
 
   @RequestMapping(method = RequestMethod.POST, consumes = "application/json")
   ResponseEntity<?> addNewCourse(@RequestBody CourseEntity newCourse) {
-    //boolean...
+    //boolean..
     CourseEntity addedCourse = courseService.addCourse(newCourse);
     classesService.createClassesForCourse(addedCourse);
     return new ResponseEntity<String>(HttpStatus.OK);
