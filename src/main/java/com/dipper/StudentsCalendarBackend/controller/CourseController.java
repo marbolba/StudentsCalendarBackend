@@ -30,6 +30,7 @@ public class CourseController {
   ResponseEntity<?> addNewCourse(@RequestBody CourseEntity newCourse) {
     //boolean..
     CourseEntity addedCourse = courseService.addCourse(newCourse);
+    System.out.println(addedCourse);
     classesService.createClassesForCourse(addedCourse);
     return new ResponseEntity<String>(HttpStatus.OK);
   }

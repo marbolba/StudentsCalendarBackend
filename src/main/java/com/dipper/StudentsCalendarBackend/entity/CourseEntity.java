@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -14,8 +16,12 @@ public class CourseEntity {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "id", updatable = false, nullable = false)
-  int courseId;
+  @Column(name = "course_id", updatable = false, nullable = false)
+  int course_id;
+
+  @Column(name = "user_id", updatable = false, nullable = false)
+  int user_id;
+
   String courseName;
   String courseType;
   int courseDay;
@@ -24,26 +30,20 @@ public class CourseEntity {
   String startDate;
   String endDate;
 
-  @Override
-  public String toString() {
-    return "CourseEntity{" +
-        "courseId=" + courseId +
-        ", courseName='" + courseName + '\'' +
-        ", courseType='" + courseType + '\'' +
-        ", courseDay='" + courseDay + '\'' +
-        ", startTime='" + startTime + '\'' +
-        ", endTime='" + endTime + '\'' +
-        ", startDate='" + startDate + '\'' +
-        ", endDate='" + endDate + '\'' +
-        '}';
+  public int getCourse_id() {
+    return course_id;
   }
 
-  public int getCourseId() {
-    return courseId;
+  public void setCourse_id(int course_id) {
+    this.course_id = course_id;
   }
 
-  public void setCourseId(int courseId) {
-    this.courseId = courseId;
+  public int getUser_id() {
+    return user_id;
+  }
+
+  public void setUser_id(int user_id) {
+    this.user_id = user_id;
   }
 
   public String getCourseName() {
@@ -100,5 +100,20 @@ public class CourseEntity {
 
   public void setEndDate(String endDate) {
     this.endDate = endDate;
+  }
+
+  @Override
+  public String toString() {
+    return "CourseEntity{" +
+        "course_id=" + course_id +
+        ", user_id=" + user_id +
+        ", courseName='" + courseName + '\'' +
+        ", courseType='" + courseType + '\'' +
+        ", courseDay=" + courseDay +
+        ", startTime='" + startTime + '\'' +
+        ", endTime='" + endTime + '\'' +
+        ", startDate='" + startDate + '\'' +
+        ", endDate='" + endDate + '\'' +
+        '}';
   }
 }

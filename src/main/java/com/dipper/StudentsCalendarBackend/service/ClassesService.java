@@ -61,7 +61,7 @@ public class ClassesService {
       currentProcessedEndDate.set(Calendar.MINUTE,Integer.parseInt(newCourse.getEndTime().substring(3,5)));
       classesRepository.save(
           new ClassesEntity(
-              newCourse.getCourseId(),
+              newCourse.getCourse_id(),
               newCourse.getCourseName(),
               newCourse.getCourseType(),
               currentProcessedDate.getTime(),

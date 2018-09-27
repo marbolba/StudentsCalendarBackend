@@ -7,8 +7,8 @@ import javax.persistence.*;
 public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "userId", updatable = false, nullable = false)
-    int userId;
+    @Column(name = "user_id", updatable = false, nullable = false)
+    int user_id;
 
     @Column(name = "userName",nullable = false)
     String userName;
@@ -25,24 +25,12 @@ public class UserEntity {
     @Column(name = "password",nullable = false)
     String password;
 
-    @Override
-    public String toString() {
-        return "UserEntity{" +
-                "userId=" + userId +
-                ", userName='" + userName + '\'' +
-                ", name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                '}';
+    public int getUser_id() {
+        return user_id;
     }
 
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
     }
 
     public String getUserName() {

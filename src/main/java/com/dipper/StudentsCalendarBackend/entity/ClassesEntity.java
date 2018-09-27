@@ -14,37 +14,39 @@ public class ClassesEntity {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "id", updatable = false, nullable = false)
-  int classesId;
-  int classesParentCourse;
+  @Column(name = "classes_id", updatable = false, nullable = false)
+  int classes_id;
+
+  @Column(name = "course_id", updatable = false)
+  int parentCourse_id;
   String classesName;
   String classesType;
   Date classesFullStartDate;
   Date classesFullEndDate;
 
-  public ClassesEntity(int classesParentCourse, String classesName, String classesType,
+  public ClassesEntity(int classesParentCourse_id, String classesName, String classesType,
       Date classesFullStartDate, Date classesFullEndDate) {
-    this.classesParentCourse = classesParentCourse;
+    this.parentCourse_id = classesParentCourse_id;
     this.classesName = classesName;
     this.classesType = classesType;
     this.classesFullStartDate = classesFullStartDate;
     this.classesFullEndDate = classesFullEndDate;
   }
 
-  public int getClassesId() {
-    return classesId;
+  public int getClasses_id() {
+    return classes_id;
   }
 
-  public void setClassesId(int classesId) {
-    this.classesId = classesId;
+  public void setClasses_Id(int classes_id) {
+    this.classes_id = classes_id;
   }
 
-  public int getClassesParentCourse() {
-    return classesParentCourse;
+  public int getParentCourse_id() {
+    return parentCourse_id;
   }
 
-  public void setClassesParentCourse(int classesParentCourse) {
-    this.classesParentCourse = classesParentCourse;
+  public void setParentCourse_id(int classesParentCourse_id) {
+    this.parentCourse_id = classesParentCourse_id;
   }
 
   public String getClassesName() {
