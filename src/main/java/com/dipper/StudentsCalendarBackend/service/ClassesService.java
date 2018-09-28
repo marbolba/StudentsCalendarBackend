@@ -3,8 +3,11 @@ package com.dipper.StudentsCalendarBackend.service;
 import com.dipper.StudentsCalendarBackend.entity.ClassesEntity;
 import com.dipper.StudentsCalendarBackend.entity.CourseEntity;
 import com.dipper.StudentsCalendarBackend.repository.ClassesRepository;
+import java.text.DateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -71,5 +74,12 @@ public class ClassesService {
       currentProcessedDate.set(Calendar.WEEK_OF_YEAR,currentProcessedDate.get(Calendar.WEEK_OF_YEAR)+1);
     }
     return true;
+  }
+
+  public List<ClassesEntity> getCourseClasses(int courseId, Date from, Date to){
+    for(ClassesEntity e: classesRepository.findAllByClassesFullStartDateBetweenAndParentCourseId(from,to,courseId)){
+      System.out.println(e);
+    }
+    return classesRepository.findAllByClassesFullStartDateBetweenAndParentCourseId(from,to,courseId);
   }
 }

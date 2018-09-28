@@ -36,7 +36,7 @@ public class CourseController {
   }
 
   @RequestMapping(method = RequestMethod.GET, produces = "application/json")
-  ResponseEntity<?> getCourses(){
-    return new ResponseEntity<List<CourseEntity>>(courseService.getCourses(),HttpStatus.OK);
+  ResponseEntity<?> getCourses(@RequestParam int userId){
+    return new ResponseEntity<>(courseService.getCourses(userId),HttpStatus.OK);
   }
 }
