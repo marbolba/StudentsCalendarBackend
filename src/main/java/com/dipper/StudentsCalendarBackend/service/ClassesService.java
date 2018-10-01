@@ -77,9 +77,9 @@ public class ClassesService {
   }
 
   public List<ClassesEntity> getCourseClasses(int courseId, Date from, Date to){
-    for(ClassesEntity e: classesRepository.findAllByClassesFullStartDateBetweenAndParentCourseId(from,to,courseId)){
-      System.out.println(e);
-    }
+//    for(ClassesEntity e: classesRepository.findAllByClassesFullStartDateBetweenAndParentCourseId(from,to,courseId)){
+//      System.out.println(e);
+//    }
     return classesRepository.findAllByClassesFullStartDateBetweenAndParentCourseId(from,to,courseId);
   }
 }

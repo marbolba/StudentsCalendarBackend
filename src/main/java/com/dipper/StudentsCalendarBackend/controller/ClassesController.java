@@ -11,13 +11,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpOutputMessage;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.constraints.Null;
 
 @CrossOrigin
 @RestController
@@ -35,20 +34,25 @@ public class ClassesController {
   }
 
   @RequestMapping(method = RequestMethod.GET, produces = "application/json")
-  ResponseEntity<?> getClasses(@RequestParam int userId,@RequestParam int year,@RequestParam int month){
+  ResponseEntity<?> getClasses(@RequestParam int userId,@RequestParam int year,@RequestParam int month,@RequestParam int lastDayOfMonth){
     List<CourseEntity> usersCourses = courseService.getCourses(userId);
     Date dateFrom = null;
     Date dateTo = null;
     try {
       dateFrom = new SimpleDateFormat("yyyy-MM-dd").parse(year + "-" + month + "-01");
-      dateTo = new SimpleDateFormat("yyyy-MM-dd").parse(year + "-" + month + "-30");
+      dateTo = new SimpleDateFormat("yyyy-MM-dd").parse(year + "-" + month + "-" + lastDayOfMonth);
 
     }catch(ParseException e){}
+
+    List<ClassesEntity> usersClasses = new ArrayList<ClassesEntity>();
     for(CourseEntity course: usersCourses){
-      System.out.println("from:"+dateFrom+"\nto:"+dateTo);
-      List<ClassesEntity> usersClasses = classesService.getCourseClasses(course.getCourse_id(),dateFrom,dateTo);
-      System.out.println(usersClasses);
+      try {
+        usersClasses.addAll(classesService.getCourseClasses(course.getCourse_id(), dateFrom, dateTo));
+      }catch(NullPointerException e){
+        System.out.println("err:"+e.getMessage());
+      }
     }
-    return new ResponseEntity<>(HttpStatus.OK);
+    System.out.println(usersClasses);
+    return new ResponseEntity<>(usersClasses, HttpStatus.OK);
   }
 }
