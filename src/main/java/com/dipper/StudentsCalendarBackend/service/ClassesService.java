@@ -53,10 +53,11 @@ public class ClassesService {
     //prepare first day of course
     Calendar currentProcessedDate = this.copyCalendarObject(startDate);
     System.out.println(currentProcessedDate.getTime());
-    currentProcessedDate.set(Calendar.DAY_OF_WEEK,newCourse.getCourseDay());
+    currentProcessedDate.set(Calendar.DAY_OF_WEEK,newCourse.getCourseDay()+1);
     if(currentProcessedDate.before(startDate)){
       currentProcessedDate.set(Calendar.WEEK_OF_YEAR,currentProcessedDate.get(Calendar.WEEK_OF_YEAR)+1);
     }
+    System.out.println("DZIEN: "+newCourse.getCourseDay()+"Day of week:");
 
     while(currentProcessedDate.before(endDate)){
       Calendar currentProcessedEndDate = copyCalendarObject(currentProcessedDate);
