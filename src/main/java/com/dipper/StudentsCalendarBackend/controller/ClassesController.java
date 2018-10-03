@@ -40,9 +40,11 @@ public class ClassesController {
     Date dateTo = null;
     try {
       dateFrom = new SimpleDateFormat("yyyy-MM-dd").parse(year + "-" + month + "-01");
-      dateTo = new SimpleDateFormat("yyyy-MM-dd").parse(year + "-" + month + "-" + lastDayOfMonth);
+      dateTo = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(year + "-" + month + "-" + lastDayOfMonth + " 23:59");
 
     }catch(ParseException e){}
+    System.out.println(dateFrom);
+    System.out.println(dateTo);
 
     List<ClassesEntity> usersClasses = new ArrayList<ClassesEntity>();
     for(CourseEntity course: usersCourses){
