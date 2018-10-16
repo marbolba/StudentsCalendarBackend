@@ -5,7 +5,6 @@ import com.dipper.StudentsCalendarBackend.converter.UserEntityUserDtoConverter;
 import com.dipper.StudentsCalendarBackend.dto.UserDto;
 import com.dipper.StudentsCalendarBackend.entity.UserEntity;
 import com.dipper.StudentsCalendarBackend.repository.UserRepository;
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

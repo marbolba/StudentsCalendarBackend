@@ -20,16 +20,16 @@ public class FileEntity {
     private int fileOwnerId;
     private int classesId;
 
-    private byte[] imageDataBytes;
+    private byte[] fileBytes;
     private String fileFormat;
-    private String fileSize;
+    private long fileSize;
 
-    public byte[] getImageDataBytes() {
-        return imageDataBytes;
+    public byte[] getFileBytes() {
+        return fileBytes;
     }
 
-    public void setImageDataBytes(byte[] imageDataBytes) {
-        this.imageDataBytes = imageDataBytes;
+    public void setFileBytes(byte[] fileBytes) {
+        this.fileBytes = fileBytes;
     }
 
     public int getFileId() {
@@ -64,11 +64,11 @@ public class FileEntity {
         this.fileFormat = fileFormat;
     }
 
-    public String getFileSize() {
+    public long getFileSize() {
         return fileSize;
     }
 
-    public void setFileSize(String fileSize) {
+    public void setFileSize(long fileSize) {
         this.fileSize = fileSize;
     }
 
