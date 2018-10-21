@@ -11,8 +11,8 @@ import java.util.List;
 
 
 @Repository
-public interface FileRepository extends JpaRepository<FileEntity, String> {
+public interface FileRepository extends JpaRepository<FileEntity, Integer> {
 
-    @Query("select new com.dipper.StudentsCalendarBackend.dto.FileDto(a.fileId, a.classesId, a.fileFormat, a.fileSize) from FileEntity a where fileOwnerId=:#{#fileOwnerId} and classesId=:#{#classesId}")
+    @Query("select new com.dipper.StudentsCalendarBackend.dto.FileDto(a.fileId, a.classesId, a.fileFormat, a.fileSize, a.fileName) from FileEntity a where fileOwnerId=:#{#fileOwnerId} and classesId=:#{#classesId}")
     List<FileDto> findByFileOwnerIdAndClassesId(@Param("fileOwnerId") int fileOwnerId,@Param("classesId") int classesId);
 }

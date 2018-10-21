@@ -22,9 +22,18 @@ public class FileController {
         System.out.println(file);
         return new ResponseEntity<>(HttpStatus.OK);
     }
-    @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE, params = {"fileOwnerId","classesId"})
     public ResponseEntity<?> getCoursesFiles(@RequestParam int fileOwnerId,@RequestParam int classesId){
         return new ResponseEntity<>(fileService.getCoursesFiles(fileOwnerId,classesId),HttpStatus.OK);
+    }
+    @RequestMapping(method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE, params = {"fileId"})
+    public ResponseEntity<?> getFileById(@RequestParam int fileId){
+        return new ResponseEntity<>(fileService.getFile(fileId),HttpStatus.OK);
+    }
+    @RequestMapping(method = RequestMethod.DELETE)
+    public ResponseEntity<?> deleteFile(@RequestParam int fileId){
+        fileService.deleteFile(fileId);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 }

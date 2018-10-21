@@ -32,11 +32,18 @@ public class FileService {
         fileEntity.setFileBytes(fileBytes);
         fileEntity.setFileFormat(file.getContentType());
         fileEntity.setFileSize(file.getSize());
+        fileEntity.setFileName(file.getOriginalFilename());
 
         return fileRepository.save(fileEntity);
     }
 
     public List<FileDto> getCoursesFiles(int fileOwnerId, int classesId){
         return fileRepository.findByFileOwnerIdAndClassesId(fileOwnerId,classesId);
+    }
+    public FileEntity getFile(int fileId){
+        return fileRepository.findById(fileId).get();
+    }
+    public void deleteFile(int fileId){
+        fileRepository.deleteById(fileId);
     }
 }

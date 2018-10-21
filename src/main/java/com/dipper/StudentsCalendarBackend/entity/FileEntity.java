@@ -21,8 +21,17 @@ public class FileEntity {
     private int classesId;
 
     private byte[] fileBytes;
+    private String fileName;
     private String fileFormat;
     private long fileSize;
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
 
     public byte[] getFileBytes() {
         return fileBytes;

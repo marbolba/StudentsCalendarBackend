@@ -13,15 +13,25 @@ public class FileDto {
 
     private String fileFormat;
     private long fileSize;
+    private String fileName;
 
-    public FileDto() {
-    }
-
-    public FileDto(int fileId, int classesId, String fileFormat, long fileSize) {
+    public FileDto(int fileId, int classesId, String fileFormat, long fileSize, String fileName) {
         this.fileId = fileId;
         this.classesId = classesId;
         this.fileFormat = fileFormat;
         this.fileSize = fileSize;
+        this.fileName = fileName;
+    }
+
+    public FileDto() {
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
     }
 
     public int getFileId() {
