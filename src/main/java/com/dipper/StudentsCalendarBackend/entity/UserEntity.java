@@ -1,6 +1,7 @@
 package com.dipper.StudentsCalendarBackend.entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "Users")
@@ -8,22 +9,35 @@ public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id", updatable = false, nullable = false)
-    int user_id;
+    private int user_id;
 
     @Column(name = "userName",nullable = false)
-    String userName;
+    private String userName;
 
     @Column(name = "name")
-    String name;
+    private String name;
 
     @Column(name = "surname")
-    String surname;
+    private String surname;
 
     @Column(name = "email",nullable = false)
-    String email;
+    private String email;
 
     @Column(name = "password",nullable = false)
-    String password;
+    private String password;
+
+    @ManyToMany(mappedBy = "users")
+    private List<GroupEntity> users_groups;
+
+    @OneToMany(/*fetch= FetchType.LAZY, cascade = CascadeType.ALL, */mappedBy="group_owner")
+    private List<GroupEntity> groups_owner;
+
+    public UserEntity() {
+    }
+
+    public UserEntity(int user_id) {
+        this.user_id = user_id;
+    }
 
     public int getUser_id() {
         return user_id;
@@ -71,5 +85,35 @@ public class UserEntity {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public List<GroupEntity> getUsers_groups() {
+        return users_groups;
+    }
+
+    public void setUsers_groups(List<GroupEntity> users_groups) {
+        this.users_groups = users_groups;
+    }
+
+    public List<GroupEntity> getGroups_owner() {
+        return groups_owner;
+    }
+
+    public void setGroups_owner(List<GroupEntity> groups_owner) {
+        this.groups_owner = groups_owner;
+    }
+
+    @Override
+    public String toString() {
+        return "UserEntity{" +
+                "user_id=" + user_id +
+                ", userName='" + userName + '\'' +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", users_groups=" + users_groups +
+                ", groups_owner=" + groups_owner +
+                '}';
     }
 }

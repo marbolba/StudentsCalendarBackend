@@ -7,6 +7,7 @@ public class UserDto {
     String name;
     String surname;
 
+
     public UserDto(int userId, String userName, String email, String name, String surname) {
         this.userId = userId;
         this.userName = userName;
