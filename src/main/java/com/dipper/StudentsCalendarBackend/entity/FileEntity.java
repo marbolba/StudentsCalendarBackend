@@ -1,12 +1,8 @@
 package com.dipper.StudentsCalendarBackend.entity;
 
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "Files")
@@ -24,6 +20,9 @@ public class FileEntity {
     private String fileName;
     private String fileFormat;
     private long fileSize;
+
+    @ManyToMany(mappedBy = "files")
+    private List<GroupEntity> sharedToGroups;
 
     public String getFileName() {
         return fileName;

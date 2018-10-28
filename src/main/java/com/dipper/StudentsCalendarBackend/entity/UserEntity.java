@@ -29,7 +29,7 @@ public class UserEntity {
     @ManyToMany(mappedBy = "users")
     private List<GroupEntity> users_groups;
 
-    @OneToMany(/*fetch= FetchType.LAZY, cascade = CascadeType.ALL, */mappedBy="group_owner")
+    @OneToMany(/*fetch= FetchType.LAZY, cascade = CascadeType.ALL, */mappedBy="groupOwner")
     private List<GroupEntity> groups_owner;
 
     public UserEntity() {

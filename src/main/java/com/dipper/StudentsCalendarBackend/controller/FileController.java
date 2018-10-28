@@ -3,6 +3,7 @@ package com.dipper.StudentsCalendarBackend.controller;
 import com.dipper.StudentsCalendarBackend.service.FileService;
 import com.dipper.StudentsCalendarBackend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpOutputMessage;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -35,5 +36,4 @@ public class FileController {
         fileService.deleteFile(fileId);
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
 }

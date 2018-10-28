@@ -38,6 +38,7 @@ public class FileService {
     }
 
     public List<FileDto> getCoursesFiles(int fileOwnerId, int classesId){
+        //TODO REWRITE TO USER MAPPER
         return fileRepository.findByFileOwnerIdAndClassesId(fileOwnerId,classesId);
     }
     public FileEntity getFile(int fileId){

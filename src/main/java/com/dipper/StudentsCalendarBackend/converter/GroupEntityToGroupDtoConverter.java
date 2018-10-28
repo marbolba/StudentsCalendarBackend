@@ -7,6 +7,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class GroupEntityToGroupDtoConverter {
     public GroupDto convert(GroupEntity groupEntity){
-        return new GroupDto(groupEntity.getGroup_id(),groupEntity.getGroup_name(),groupEntity.getGroup_description());
+        return new GroupDto(groupEntity.getGroupId(),groupEntity.getGroupName(),groupEntity.getGroupDescription());
     }
 }
