@@ -20,10 +20,12 @@ public class GroupController {
         return new ResponseEntity<>(groupService.addGroup(groupEntity), HttpStatus.CREATED);
     }
     @RequestMapping(value = "/user", method = RequestMethod.POST,consumes = "application/json")
-    ResponseEntity<?> addUserToGroup(@RequestBody UserEntity userEntity,@RequestParam int groupId){
-        System.out.println(userEntity);
-        System.out.println(groupId);
-        groupService.addUserToGroup(userEntity,groupId);
+    ResponseEntity<?> addUserToGroup(@RequestBody UserEntity userEntity,@RequestParam String groupName){
+        groupService.addUserToGroup(userEntity,groupName);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+    @RequestMapping(value = "/user", method = RequestMethod.GET, produces = "application/json")
+    ResponseEntity<?> getUsersGroups(@RequestParam int userId){
+        return new ResponseEntity<>(groupService.getUsersGroups(userId),HttpStatus.OK);
     }
 }

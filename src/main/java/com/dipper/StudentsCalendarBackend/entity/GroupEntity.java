@@ -14,7 +14,7 @@ public class GroupEntity {
     private int group_id;
 
     @Column(name = "group_name",nullable = false)
-    private String group_name;
+    private String groupName;
 
     @Column(name = "group_description")
     private String group_description;
@@ -42,11 +42,11 @@ public class GroupEntity {
     }
 
     public String getGroup_name() {
-        return group_name;
+        return groupName;
     }
 
-    public void setGroup_name(String group_name) {
-        this.group_name = group_name;
+    public void setGroup_name(String groupName) {
+        this.groupName = groupName;
     }
 
     public String getGroup_description() {

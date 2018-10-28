@@ -38,6 +38,7 @@ public class UserEntity {
     public UserEntity(int user_id) {
         this.user_id = user_id;
     }
+    public boolean checkById(int userId) {return this.user_id==userId;}
 
     public int getUser_id() {
         return user_id;
