@@ -1,34 +1,28 @@
 package com.dipper.StudentsCalendarBackend.dto;
 
-import com.dipper.StudentsCalendarBackend.entity.UserEntity;
-
-import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
-
 public class GroupDto {
 
-    private int group_id;
+    private int groupId;
 
     private String groupName;
 
-    private String group_description;
+    private String groupDescription;
 
     public GroupDto() {
     }
 
-    public GroupDto(int group_id, String groupName, String group_description) {
-        this.group_id = group_id;
+    public GroupDto(int groupId, String groupName, String groupDescription) {
+        this.groupId = groupId;
         this.groupName = groupName;
-        this.group_description = group_description;
+        this.groupDescription = groupDescription;
     }
 
-    public int getGroup_id() {
-        return group_id;
+    public int getGroupId() {
+        return groupId;
     }
 
-    public void setGroup_id(int group_id) {
-        this.group_id = group_id;
+    public void setGroupId(int groupId) {
+        this.groupId = groupId;
     }
 
     public String getGroupName() {
@@ -39,11 +33,11 @@ public class GroupDto {
         this.groupName = groupName;
     }
 
-    public String getGroup_description() {
-        return group_description;
+    public String getGroupDescription() {
+        return groupDescription;
     }
 
-    public void setGroup_description(String group_description) {
-        this.group_description = group_description;
+    public void setGroupDescription(String groupDescription) {
+        this.groupDescription = groupDescription;
     }
 }

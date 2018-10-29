@@ -46,10 +46,10 @@ public class ClassesController {
     System.out.println(dateFrom);
     System.out.println(dateTo);
 
-    List<ClassesEntity> usersClasses = new ArrayList<ClassesEntity>();
+    List<ClassesEntity> usersClasses = new ArrayList<>();
     for(CourseEntity course: usersCourses){
       try {
-        usersClasses.addAll(classesService.getCourseClasses(course.getCourse_id(), dateFrom, dateTo));
+        usersClasses.addAll(classesService.getCourseClasses(course.getCourseId(), dateFrom, dateTo));
       }catch(NullPointerException e){
         System.out.println("err:"+e.getMessage());
       }

@@ -17,42 +17,47 @@ public class ClassesEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "classes_id", updatable = false, nullable = false)
-  int classesId;
+  private int classesId;
 
   @Column(name = "course_id", updatable = false)
-  int parentCourseId;
-  String classesName;
-  String classesType;
+  private int parentCourseId;
+
+  @Column(name = "classes_name")
+  private String classesName;
+
+  @Column(name = "classes_type")
+  private String classesType;
 
   @Temporal(TemporalType.TIMESTAMP)
-  Date classesFullStartDate;
+  private Date classesFullStartDate;
   @Temporal(TemporalType.TIMESTAMP)
-  Date classesFullEndDate;
+  private Date classesFullEndDate;
 
-  public ClassesEntity(int classesParentCourse_id, String classesName, String classesType,
-      Date classesFullStartDate, Date classesFullEndDate) {
-    this.parentCourseId = classesParentCourse_id;
+  public ClassesEntity() {
+  }
+
+  public ClassesEntity(int classesParentCourseId, String classesName, String classesType,
+                       Date classesFullStartDate, Date classesFullEndDate) {
+    this.parentCourseId = classesParentCourseId;
     this.classesName = classesName;
     this.classesType = classesType;
     this.classesFullStartDate = classesFullStartDate;
     this.classesFullEndDate = classesFullEndDate;
   }
 
-  public ClassesEntity() {}
-
-  public int getClasses_id() {
+  public int getClassesId() {
     return classesId;
   }
 
-  public void setClasses_Id(int classesId) {
+  public void setClassesId(int classesId) {
     this.classesId = classesId;
   }
 
-  public int getParentCourse_id() {
+  public int getParentCourseId() {
     return parentCourseId;
   }
 
-  public void setParentCourse_id(int parentCourseId) {
+  public void setParentCourseId(int parentCourseId) {
     this.parentCourseId = parentCourseId;
   }
 
@@ -91,12 +96,12 @@ public class ClassesEntity {
   @Override
   public String toString() {
     return "ClassesEntity{" +
-        "classes_id=" + classesId +
-        ", parentCourse_id=" + parentCourseId +
-        ", classesName='" + classesName + '\'' +
-        ", classesType='" + classesType + '\'' +
-        ", classesFullStartDate=" + classesFullStartDate +
-        ", classesFullEndDate=" + classesFullEndDate +
-        '}';
+            "classesId=" + classesId +
+            ", parentCourseId=" + parentCourseId +
+            ", classesName='" + classesName + '\'' +
+            ", classesType='" + classesType + '\'' +
+            ", classesFullStartDate=" + classesFullStartDate +
+            ", classesFullEndDate=" + classesFullEndDate +
+            '}';
   }
 }

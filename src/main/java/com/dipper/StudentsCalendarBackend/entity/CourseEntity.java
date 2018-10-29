@@ -17,18 +17,18 @@ public class CourseEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "course_id", updatable = false, nullable = false)
-  int course_id;
+  private int courseId;
 
   @Column(name = "user_id", updatable = false, nullable = false)
-  int userId;
+  private int userId;
 
-  String courseName;
-  String courseType;
-  int courseDay;
-  String startTime;
-  String endTime;
-  String startDate;
-  String endDate;
+  private String courseName;
+  private String courseType;
+  private int courseDay;
+  private String startTime;
+  private String endTime;
+  private String startDate;
+  private String endDate;
 
   //change dates to JPA standardes:
   /*
@@ -36,12 +36,12 @@ public class CourseEntity {
     @Temporal(TemporalType.TIME)
   * */
 
-  public int getCourse_id() {
-    return course_id;
+  public int getCourseId() {
+    return courseId;
   }
 
-  public void setCourse_id(int course_id) {
-    this.course_id = course_id;
+  public void setCourseId(int courseId) {
+    this.courseId = courseId;
   }
 
   public int getUserId() {
@@ -111,15 +111,15 @@ public class CourseEntity {
   @Override
   public String toString() {
     return "CourseEntity{" +
-        "course_id=" + course_id +
-        ", user_id=" + userId +
-        ", courseName='" + courseName + '\'' +
-        ", courseType='" + courseType + '\'' +
-        ", courseDay=" + courseDay +
-        ", startTime='" + startTime + '\'' +
-        ", endTime='" + endTime + '\'' +
-        ", startDate='" + startDate + '\'' +
-        ", endDate='" + endDate + '\'' +
-        '}';
+            "courseId=" + courseId +
+            ", userId=" + userId +
+            ", courseName='" + courseName + '\'' +
+            ", courseType='" + courseType + '\'' +
+            ", courseDay=" + courseDay +
+            ", startTime='" + startTime + '\'' +
+            ", endTime='" + endTime + '\'' +
+            ", startDate='" + startDate + '\'' +
+            ", endDate='" + endDate + '\'' +
+            '}';
   }
 }

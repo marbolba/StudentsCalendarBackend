@@ -50,7 +50,7 @@ public class GroupService {
         //TODO check if user is already present in group
         GroupEntity searchedGroup = groupRepository.findByGroupName(groupName);
         if(searchedGroup!=null){
-            newUser = userRepository.findById(newUser.getUser_id()).get();
+            newUser = userRepository.findById(newUser.getUserId()).get();
             searchedGroup.setUsers(newUser);
             groupRepository.save(searchedGroup);
         }

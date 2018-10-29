@@ -1,11 +1,11 @@
 package com.dipper.StudentsCalendarBackend.dto;
 
 public class UserDto {
-    int userId;
-    String userName;
-    String email;
-    String name;
-    String surname;
+    private int userId;
+    private String userName;
+    private String email;
+    private String name;
+    private String surname;
 
 
     public UserDto(int userId, String userName, String email, String name, String surname) {

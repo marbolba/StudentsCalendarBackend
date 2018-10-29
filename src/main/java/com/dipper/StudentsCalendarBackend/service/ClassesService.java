@@ -22,7 +22,7 @@ public class ClassesService {
     this.classesRepository = classesRepository;
   }
 
-  public Calendar copyCalendarObject(Calendar objectToCopy){
+  private Calendar copyCalendarObject(Calendar objectToCopy){
     return new GregorianCalendar(
         objectToCopy.get(Calendar.YEAR),
         objectToCopy.get(Calendar.MONTH),
@@ -65,7 +65,7 @@ public class ClassesService {
       currentProcessedEndDate.set(Calendar.MINUTE,Integer.parseInt(newCourse.getEndTime().substring(3,5)));
       classesRepository.save(
           new ClassesEntity(
-              newCourse.getCourse_id(),
+              newCourse.getCourseId(),
               newCourse.getCourseName(),
               newCourse.getCourseType(),
               currentProcessedDate.getTime(),

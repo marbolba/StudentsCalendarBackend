@@ -9,9 +9,9 @@ public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id", updatable = false, nullable = false)
-    private int user_id;
+    private int userId;
 
-    @Column(name = "userName",nullable = false)
+    @Column(name = "user_name",nullable = false)
     private String userName;
 
     @Column(name = "name")
@@ -26,26 +26,29 @@ public class UserEntity {
     @Column(name = "password",nullable = false)
     private String password;
 
+    //minor relation
     @ManyToMany(mappedBy = "users")
-    private List<GroupEntity> users_groups;
+    private List<GroupEntity> usersGroups;
 
-    @OneToMany(/*fetch= FetchType.LAZY, cascade = CascadeType.ALL, */mappedBy="groupOwner")
-    private List<GroupEntity> groups_owner;
+    //minor relation
+    @OneToMany(mappedBy="groupOwner")
+    private List<GroupEntity> groupsOwner;
 
     public UserEntity() {
     }
 
-    public UserEntity(int user_id) {
-        this.user_id = user_id;
-    }
-    public boolean checkById(int userId) {return this.user_id==userId;}
-
-    public int getUser_id() {
-        return user_id;
+    public UserEntity(int userId) {
+        this.userId = userId;
     }
 
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
+    public boolean checkById(int userId) {return this.userId==userId;}
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public String getUserName() {
@@ -88,33 +91,33 @@ public class UserEntity {
         this.password = password;
     }
 
-    public List<GroupEntity> getUsers_groups() {
-        return users_groups;
+    public List<GroupEntity> getUsersGroups() {
+        return usersGroups;
     }
 
-    public void setUsers_groups(List<GroupEntity> users_groups) {
-        this.users_groups = users_groups;
+    public void setUsersGroups(List<GroupEntity> usersGroups) {
+        this.usersGroups = usersGroups;
     }
 
-    public List<GroupEntity> getGroups_owner() {
-        return groups_owner;
+    public List<GroupEntity> getGroupsOwner() {
+        return groupsOwner;
     }
 
-    public void setGroups_owner(List<GroupEntity> groups_owner) {
-        this.groups_owner = groups_owner;
+    public void setGroupsOwner(List<GroupEntity> groupsOwner) {
+        this.groupsOwner = groupsOwner;
     }
 
     @Override
     public String toString() {
         return "UserEntity{" +
-                "user_id=" + user_id +
+                "userId=" + userId +
                 ", userName='" + userName + '\'' +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
-                ", users_groups=" + users_groups +
-                ", groups_owner=" + groups_owner +
+                ", usersGroups=" + usersGroups +
+                ", groupsOwner=" + groupsOwner +
                 '}';
     }
 }
