@@ -28,15 +28,13 @@ public class CourseController {
 
   @RequestMapping(method = RequestMethod.POST, consumes = "application/json")
   ResponseEntity<?> addNewCourse(@RequestBody CourseEntity newCourse) {
-    //boolean..
     CourseEntity addedCourse = courseService.addCourse(newCourse);
-    System.out.println(addedCourse);
     classesService.createClassesForCourse(addedCourse);
     return new ResponseEntity<String>(HttpStatus.OK);
   }
 
   @RequestMapping(method = RequestMethod.GET, produces = "application/json")
   ResponseEntity<?> getCourses(@RequestParam int userId){
-    return new ResponseEntity<>(courseService.getCourses(userId),HttpStatus.OK);
+    return new ResponseEntity<>(courseService.getCoursesDto(userId),HttpStatus.OK);
   }
 }

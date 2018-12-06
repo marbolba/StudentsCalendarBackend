@@ -20,7 +20,6 @@ public class FileController {
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<?> saveFile(@RequestParam(value = "file") MultipartFile file,@RequestParam int fileOwnerId,@RequestParam int classesId){
         fileService.saveFile(file,fileOwnerId,classesId);
-        System.out.println(file);
         return new ResponseEntity<>(HttpStatus.OK);
     }
     @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE, params = {"fileOwnerId","classesId"})
