@@ -1,25 +1,12 @@
-package com.dipper.StudentsCalendarBackend.entity;
+package com.dipper.StudentsCalendarBackend.dto;
 
-
-import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
-@Entity
-@Table(name = "Courses")
-public class CourseEntity {
+public class CoursesDto {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "course_id", updatable = false, nullable = false)
     private int courseId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "courseOwner", nullable = false)
-    private UserEntity courseOwner;
-
-    @OneToMany(mappedBy = "parentCourseId")
-    private List<ClassesEntity> classes = new ArrayList<>();
+    private int courseOwner;
 
     private String courseName;
     private String courseType;
@@ -28,26 +15,20 @@ public class CourseEntity {
     private String endTime;
     private String startDate;
     private String endDate;
+    private List<Integer> classes;
 
-    //change dates to JPA standardes:
-  /*
-    @Temporal(TemporalType.DATE)
-    @Temporal(TemporalType.TIME)
-  * */
-
-    public CourseEntity() {
-    }
-
-    public CourseEntity(int courseId) {
+    public CoursesDto(int courseId, int courseOwner, String courseName, String courseType, int courseDay,
+                      String startTime, String endTime, String startDate, String endDate, List<Integer> classes) {
         this.courseId = courseId;
-    }
-
-    public List<ClassesEntity> getClasses() {
-        return classes;
-    }
-
-    public void setClasses(ClassesEntity classesEntity) {
-        this.classes.add(classesEntity);
+        this.courseOwner = courseOwner;
+        this.courseName = courseName;
+        this.courseType = courseType;
+        this.courseDay = courseDay;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.classes = classes;
     }
 
     public int getCourseId() {
@@ -58,16 +39,12 @@ public class CourseEntity {
         this.courseId = courseId;
     }
 
-    public UserEntity getCourseOwner() {
+    public int getCourseOwner() {
         return courseOwner;
     }
 
-    public void setCourseOwner(UserEntity courseOwner) {
+    public void setCourseOwner(int courseOwner) {
         this.courseOwner = courseOwner;
-    }
-
-    public void setCourseOwner(int courseOwnerId) {
-        this.courseOwner = new UserEntity(courseOwnerId);
     }
 
     public String getCourseName() {
@@ -126,9 +103,17 @@ public class CourseEntity {
         this.endDate = endDate;
     }
 
+    public List<Integer> getClasses() {
+        return classes;
+    }
+
+    public void setClasses(List<Integer> classes) {
+        this.classes = classes;
+    }
+
     @Override
     public String toString() {
-        return "CourseEntity{" +
+        return "CoursesDto{" +
                 "courseId=" + courseId +
                 ", courseOwner=" + courseOwner +
                 ", courseName='" + courseName + '\'' +
@@ -138,6 +123,7 @@ public class CourseEntity {
                 ", endTime='" + endTime + '\'' +
                 ", startDate='" + startDate + '\'' +
                 ", endDate='" + endDate + '\'' +
+                ", classes=" + classes +
                 '}';
     }
 }

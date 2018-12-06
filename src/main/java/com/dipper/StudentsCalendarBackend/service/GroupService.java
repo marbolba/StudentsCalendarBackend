@@ -72,13 +72,12 @@ public class GroupService {
 
     public void addFileToGroup(int groupId,int fileId){
         //TODO CHECK IF ANYTHING FOUND
-        FileEntity fileToAdd = fileService.getFile(fileId);
+        FileEntity fileToAdd = fileService.getFileById(fileId);
         GroupEntity groupEntity = getGroupById(groupId);
         groupEntity.setFiles(fileToAdd);
         groupRepository.save(groupEntity);
     }
     public List<FileDto> getGroupFilesList(int groupId){
-        System.out.println(groupId);
         GroupEntity groupEntity = getGroupById(groupId);
         List<FileDto> filesDto = new ArrayList<>();
         for(FileEntity file: groupEntity.getFiles()){

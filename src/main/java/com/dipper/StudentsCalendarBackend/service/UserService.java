@@ -8,6 +8,8 @@ import com.dipper.StudentsCalendarBackend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.NoSuchElementException;
+
 @Service
 public class UserService {
     @Autowired
@@ -30,6 +32,14 @@ public class UserService {
             return userEntityUserDtoConverter.convert(recivedUser);
         }else{
             return null;
+        }
+    }
+
+    public UserEntity findUserById(int userId){
+        if(userRepository.findById(userId).isPresent()){
+            return userRepository.findById(userId).get();
+        }else {
+            throw new NoSuchElementException(){};
         }
     }
 }

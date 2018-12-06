@@ -19,8 +19,8 @@ public class GroupEntity {
     @Column(name = "group_description")
     private String groupDescription;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="user_id", nullable=false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="groupOwner", nullable=false)
     private UserEntity groupOwner;
 
     @ManyToMany(cascade = CascadeType.MERGE)

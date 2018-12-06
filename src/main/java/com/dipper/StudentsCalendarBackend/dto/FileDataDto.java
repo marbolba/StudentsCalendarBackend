@@ -1,33 +1,27 @@
-package com.dipper.StudentsCalendarBackend.entity;
-
-import javax.persistence.*;
+package com.dipper.StudentsCalendarBackend.dto;
 import java.util.Arrays;
-import java.util.List;
 
-@Entity
-@Table(name = "Files")
-public class FileEntity {
+public class FileDataDto {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "fileId", updatable = false, nullable = false)
     private int fileId;
+    private int fileOwner;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="fileOwner", nullable=false)
-    private UserEntity fileOwner;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="parentClassesId", nullable=false)
-    private ClassesEntity parentClassesId;
+    private int parentClassesId;
 
     private byte[] fileBytes;
-    private String fileName;
     private String fileFormat;
     private long fileSize;
+    private String fileName;
 
-    @ManyToMany(mappedBy = "files")
-    private List<GroupEntity> sharedToGroups;
+    public FileDataDto(int fileId, int fileOwner, int parentClassesId, byte[] fileBytes, String fileFormat, long fileSize, String fileName) {
+        this.fileId = fileId;
+        this.fileOwner = fileOwner;
+        this.parentClassesId = parentClassesId;
+        this.fileBytes = fileBytes;
+        this.fileFormat = fileFormat;
+        this.fileSize = fileSize;
+        this.fileName = fileName;
+    }
 
     public int getFileId() {
         return fileId;
@@ -37,19 +31,19 @@ public class FileEntity {
         this.fileId = fileId;
     }
 
-    public UserEntity getFileOwner() {
+    public int getFileOwner() {
         return fileOwner;
     }
 
-    public void setFileOwner(UserEntity fileOwner) {
+    public void setFileOwner(int fileOwner) {
         this.fileOwner = fileOwner;
     }
 
-    public ClassesEntity getParentClassesId() {
+    public int getParentClassesId() {
         return parentClassesId;
     }
 
-    public void setParentClassesId(ClassesEntity parentClassesId) {
+    public void setParentClassesId(int parentClassesId) {
         this.parentClassesId = parentClassesId;
     }
 
@@ -59,14 +53,6 @@ public class FileEntity {
 
     public void setFileBytes(byte[] fileBytes) {
         this.fileBytes = fileBytes;
-    }
-
-    public String getFileName() {
-        return fileName;
-    }
-
-    public void setFileName(String fileName) {
-        this.fileName = fileName;
     }
 
     public String getFileFormat() {
@@ -85,17 +71,17 @@ public class FileEntity {
         this.fileSize = fileSize;
     }
 
-    public List<GroupEntity> getSharedToGroups() {
-        return sharedToGroups;
+    public String getFileName() {
+        return fileName;
     }
 
-    public void setSharedToGroups(List<GroupEntity> sharedToGroups) {
-        this.sharedToGroups = sharedToGroups;
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
     }
 
     @Override
     public String toString() {
-        return "FileEntity{" +
+        return "FileDataDto{" +
                 "fileId=" + fileId +
                 ", fileOwner=" + fileOwner +
                 ", parentClassesId=" + parentClassesId +
@@ -103,7 +89,6 @@ public class FileEntity {
                 ", fileName='" + fileName + '\'' +
                 ", fileFormat='" + fileFormat + '\'' +
                 ", fileSize=" + fileSize +
-                ", sharedToGroups=" + sharedToGroups +
                 '}';
     }
 }

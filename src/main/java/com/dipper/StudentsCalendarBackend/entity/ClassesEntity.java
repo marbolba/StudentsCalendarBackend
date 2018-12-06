@@ -1,14 +1,8 @@
 package com.dipper.StudentsCalendarBackend.entity;
 
 import java.util.Date;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import java.util.List;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "Classes")
@@ -19,8 +13,8 @@ public class ClassesEntity {
   @Column(name = "classes_id", updatable = false, nullable = false)
   private int classesId;
 
-  @Column(name = "course_id", updatable = false)
-  private int parentCourseId;
+  @ManyToOne(fetch = FetchType.LAZY)
+  private CourseEntity parentCourseId;
 
   @Column(name = "classes_name")
   private String classesName;
@@ -33,10 +27,17 @@ public class ClassesEntity {
   @Temporal(TemporalType.TIMESTAMP)
   private Date classesFullEndDate;
 
+  @OneToMany(mappedBy = "parentClassesId")
+  private List<FileEntity> files;
+
   public ClassesEntity() {
   }
 
-  public ClassesEntity(int classesParentCourseId, String classesName, String classesType,
+  public ClassesEntity(int classesId) {
+    this.classesId = classesId;
+  }
+
+  public ClassesEntity(CourseEntity classesParentCourseId, String classesName, String classesType,
                        Date classesFullStartDate, Date classesFullEndDate) {
     this.parentCourseId = classesParentCourseId;
     this.classesName = classesName;
@@ -53,12 +54,20 @@ public class ClassesEntity {
     this.classesId = classesId;
   }
 
-  public int getParentCourseId() {
+  public CourseEntity getParentCourseId() {
     return parentCourseId;
   }
 
-  public void setParentCourseId(int parentCourseId) {
+  public void setParentCourseId(CourseEntity parentCourseId) {
     this.parentCourseId = parentCourseId;
+  }
+
+  public List<FileEntity> getFiles() {
+    return files;
+  }
+
+  public void setFiles(List<FileEntity> files) {
+    this.files = files;
   }
 
   public String getClassesName() {

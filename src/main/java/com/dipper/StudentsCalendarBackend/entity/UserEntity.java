@@ -11,7 +11,7 @@ public class UserEntity {
     @Column(name = "user_id", updatable = false, nullable = false)
     private int userId;
 
-    @Column(name = "user_name",nullable = false)
+    @Column(name = "user_name", nullable = false)
     private String userName;
 
     @Column(name = "name")
@@ -20,19 +20,27 @@ public class UserEntity {
     @Column(name = "surname")
     private String surname;
 
-    @Column(name = "email",nullable = false)
+    @Column(name = "email", nullable = false)
     private String email;
 
-    @Column(name = "password",nullable = false)
+    @Column(name = "password", nullable = false)
     private String password;
+
+    //minor relation
+    @OneToMany(mappedBy = "fileOwner")
+    private List<FileEntity> usersFiles;
+
+    @OneToMany(mappedBy = "courseOwner")
+    private List<CourseEntity> usersCourses;
 
     //minor relation
     @ManyToMany(mappedBy = "users")
     private List<GroupEntity> usersGroups;
 
     //minor relation
-    @OneToMany(mappedBy="groupOwner")
+    @OneToMany(mappedBy = "groupOwner")
     private List<GroupEntity> groupsOwner;
+
 
     public UserEntity() {
     }
@@ -41,7 +49,9 @@ public class UserEntity {
         this.userId = userId;
     }
 
-    public boolean checkById(int userId) {return this.userId==userId;}
+    public boolean checkById(int userId) {
+        return this.userId == userId;
+    }
 
     public int getUserId() {
         return userId;
@@ -91,6 +101,22 @@ public class UserEntity {
         this.password = password;
     }
 
+    public List<FileEntity> getUsersFiles() {
+        return usersFiles;
+    }
+
+    public void setUsersFiles(List<FileEntity> usersFiles) {
+        this.usersFiles = usersFiles;
+    }
+
+    public List<CourseEntity> getUsersCourses() {
+        return usersCourses;
+    }
+
+    public void setUsersCourses(List<CourseEntity> usersCourses) {
+        this.usersCourses = usersCourses;
+    }
+
     public List<GroupEntity> getUsersGroups() {
         return usersGroups;
     }
@@ -116,6 +142,8 @@ public class UserEntity {
                 ", surname='" + surname + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
+                ", usersFiles=" + usersFiles +
+                ", usersCourses=" + usersCourses +
                 ", usersGroups=" + usersGroups +
                 ", groupsOwner=" + groupsOwner +
                 '}';

@@ -65,7 +65,7 @@ public class ClassesService {
       currentProcessedEndDate.set(Calendar.MINUTE,Integer.parseInt(newCourse.getEndTime().substring(3,5)));
       classesRepository.save(
           new ClassesEntity(
-              newCourse.getCourseId(),
+              new CourseEntity(newCourse.getCourseId()),
               newCourse.getCourseName(),
               newCourse.getCourseType(),
               currentProcessedDate.getTime(),
@@ -75,9 +75,5 @@ public class ClassesService {
       currentProcessedDate.set(Calendar.WEEK_OF_YEAR,currentProcessedDate.get(Calendar.WEEK_OF_YEAR)+1);
     }
     return true;
-  }
-
-  public List<ClassesEntity> getCourseClasses(int courseId, Date from, Date to){
-    return classesRepository.findAllByClassesFullStartDateBetweenAndParentCourseId(from,to,courseId);
   }
 }

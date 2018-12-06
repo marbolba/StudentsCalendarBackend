@@ -1,23 +1,17 @@
 package com.dipper.StudentsCalendarBackend.dto;
 
-import javax.persistence.*;
-
-@Entity
-@Table(name = "Files")
 public class FileDto {
-    @Id
-    @Column(name = "fileId", updatable = false, nullable = false)
-    private int fileId;
 
-    private int classesId;
+    private int fileId;
+    private int parentClassesId;
 
     private String fileFormat;
     private long fileSize;
     private String fileName;
 
-    public FileDto(int fileId, int classesId, String fileFormat, long fileSize, String fileName) {
+    public FileDto(int fileId, int parentClassesId, String fileFormat, long fileSize, String fileName) {
         this.fileId = fileId;
-        this.classesId = classesId;
+        this.parentClassesId = parentClassesId;
         this.fileFormat = fileFormat;
         this.fileSize = fileSize;
         this.fileName = fileName;
@@ -42,12 +36,12 @@ public class FileDto {
         this.fileId = fileId;
     }
 
-    public int getClassesId() {
-        return classesId;
+    public int getParentClassesId() {
+        return parentClassesId;
     }
 
-    public void setClassesId(int classesId) {
-        this.classesId = classesId;
+    public void setParentClassesId(int parentClassesId) {
+        this.parentClassesId = parentClassesId;
     }
 
     public String getFileFormat() {

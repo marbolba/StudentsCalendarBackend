@@ -1,7 +1,9 @@
 package com.dipper.StudentsCalendarBackend.repository;
 
 import com.dipper.StudentsCalendarBackend.dto.FileDto;
+import com.dipper.StudentsCalendarBackend.entity.ClassesEntity;
 import com.dipper.StudentsCalendarBackend.entity.FileEntity;
+import com.dipper.StudentsCalendarBackend.entity.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -13,6 +15,5 @@ import java.util.List;
 @Repository
 public interface FileRepository extends JpaRepository<FileEntity, Integer> {
 
-    @Query("select new com.dipper.StudentsCalendarBackend.dto.FileDto(a.fileId, a.classesId, a.fileFormat, a.fileSize, a.fileName) from FileEntity a where fileOwnerId=:#{#fileOwnerId} and classesId=:#{#classesId}")
-    List<FileDto> findByFileOwnerIdAndClassesId(@Param("fileOwnerId") int fileOwnerId,@Param("classesId") int classesId);
+    List<FileEntity> findByFileOwnerAndParentClassesId(UserEntity fileOwner,ClassesEntity parentClassesId);
 }
