@@ -13,6 +13,8 @@ public class FileEntityToFileDtoConverter {
     public FileDto convert(FileEntity fileEntity) {
         return new FileDto(fileEntity.getFileId(),
                 fileEntity.getParentClassesId().getClassesId(),
+                fileEntity.getFileOwner().getUserId(),
+                fileEntity.getEditDate(),
                 fileEntity.getFileFormat(),
                 fileEntity.getFileSize(),
                 fileEntity.getFileName());
@@ -29,6 +31,7 @@ public class FileEntityToFileDtoConverter {
     public FileDataDto convertToData(FileEntity fileEntity){
         return new FileDataDto(fileEntity.getFileId(),
                 fileEntity.getFileOwner().getUserId(),
+                fileEntity.getEditDate(),
                 fileEntity.getFileId(),
                 fileEntity.getFileBytes(),
                 fileEntity.getFileFormat(),

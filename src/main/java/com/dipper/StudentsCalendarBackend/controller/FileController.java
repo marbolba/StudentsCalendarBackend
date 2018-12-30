@@ -23,8 +23,12 @@ public class FileController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
     @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE, params = {"fileOwnerId","classesId"})
-    public ResponseEntity<?> getCoursesFiles(@RequestParam int fileOwnerId,@RequestParam int classesId){
-        return new ResponseEntity<>(fileService.getCoursesFiles(fileOwnerId,classesId),HttpStatus.OK);
+    public ResponseEntity<?> getClassesFiles(@RequestParam int fileOwnerId,@RequestParam int classesId){
+        return new ResponseEntity<>(fileService.getClassesFiles(fileOwnerId,classesId),HttpStatus.OK);
+    }
+    @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE, params = {"coursesId"})
+    public ResponseEntity<?> getCoursesFiles(@RequestParam int coursesId){
+        return new ResponseEntity<>(fileService.getCoursesFiles(coursesId),HttpStatus.OK);
     }
     @RequestMapping(method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE, params = {"fileId"})
     public ResponseEntity<?> getFileById(@RequestParam int fileId){

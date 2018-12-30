@@ -2,6 +2,7 @@ package com.dipper.StudentsCalendarBackend.entity;
 
 import javax.persistence.*;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -21,6 +22,10 @@ public class FileEntity {
     @JoinColumn(name="parentClassesId", nullable=false)
     private ClassesEntity parentClassesId;
 
+    //TODO dodac do ERD
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date editDate = new Date();
+
     private byte[] fileBytes;
     private String fileName;
     private String fileFormat;
@@ -35,6 +40,14 @@ public class FileEntity {
 
     public void setFileId(int fileId) {
         this.fileId = fileId;
+    }
+
+    public Date getEditDate() {
+        return editDate;
+    }
+
+    public void setEditDate(Date editTime) {
+        this.editDate = editTime;
     }
 
     public UserEntity getFileOwner() {

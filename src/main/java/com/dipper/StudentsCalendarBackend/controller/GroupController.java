@@ -28,13 +28,17 @@ public class GroupController {
     public ResponseEntity<?> getUsersGroups(@RequestParam int userId){
         return new ResponseEntity<>(groupService.getUsersGroups(userId),HttpStatus.OK);
     }
-    @RequestMapping(value = "/{groupId}/share", method = RequestMethod.POST)
+    @RequestMapping(value = "/{groupId}/share", method = RequestMethod.POST, params = {"fileId"})
     public ResponseEntity<?> shareFileToGroup(@PathVariable int groupId, @RequestParam int fileId){
         groupService.addFileToGroup(groupId,fileId);
         return new ResponseEntity<>(HttpStatus.OK);
     }
-    @RequestMapping(method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(method = RequestMethod.GET, produces = "application/json", params = {"groupId"})
     public ResponseEntity<?> getGroupFilesList(@RequestParam int groupId){
-        return new ResponseEntity<>(groupService.getGroupFilesList(groupId),HttpStatus.OK);
+        return new ResponseEntity<>(groupService.getGroupFileDtoList(groupId),HttpStatus.OK);
+    }
+    @RequestMapping(method = RequestMethod.GET, produces = "application/json", params = {"groupId","userId"})
+    public ResponseEntity<?> getUsersGroupFilesList(@RequestParam int groupId,@RequestParam int userId){
+        return new ResponseEntity<>(groupService.getUsersGroupFilesList(groupId,userId),HttpStatus.OK);
     }
 }

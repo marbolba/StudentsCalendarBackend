@@ -16,4 +16,6 @@ import java.util.List;
 public interface FileRepository extends JpaRepository<FileEntity, Integer> {
 
     List<FileEntity> findByFileOwnerAndParentClassesId(UserEntity fileOwner,ClassesEntity parentClassesId);
+    @Query(value = "select * from files f left join classes c on f.parent_classes_id = c.classes_id where c.parent_course_id_course_id = :courseID", nativeQuery = true)
+    List<FileEntity> findByParentClassesId(@Param("courseID") int courseID);
 }

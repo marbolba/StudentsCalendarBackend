@@ -1,21 +1,23 @@
 package com.dipper.StudentsCalendarBackend.dto;
 import java.util.Arrays;
+import java.util.Date;
 
 public class FileDataDto {
 
     private int fileId;
     private int fileOwner;
-
     private int parentClassesId;
 
+    private Date editDate;
     private byte[] fileBytes;
     private String fileFormat;
     private long fileSize;
     private String fileName;
 
-    public FileDataDto(int fileId, int fileOwner, int parentClassesId, byte[] fileBytes, String fileFormat, long fileSize, String fileName) {
+    public FileDataDto(int fileId, int fileOwner, Date editDate, int parentClassesId, byte[] fileBytes, String fileFormat, long fileSize, String fileName) {
         this.fileId = fileId;
         this.fileOwner = fileOwner;
+        this.editDate = editDate;
         this.parentClassesId = parentClassesId;
         this.fileBytes = fileBytes;
         this.fileFormat = fileFormat;
@@ -29,6 +31,14 @@ public class FileDataDto {
 
     public void setFileId(int fileId) {
         this.fileId = fileId;
+    }
+
+    public Date getEditDate() {
+        return editDate;
+    }
+
+    public void setEditDate(Date editDate) {
+        this.editDate = editDate;
     }
 
     public int getFileOwner() {

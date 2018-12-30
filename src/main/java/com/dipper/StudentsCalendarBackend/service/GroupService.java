@@ -36,7 +36,7 @@ public class GroupService {
         this.fileEntityToFileDtoConverter = fileEntityToFileDtoConverter;
     }
 
-    public GroupEntity getGroupById(int groupId){
+    private GroupEntity getGroupById(int groupId){
         //TODO if not found ...
         return groupRepository.findById(groupId).get();
     }
@@ -77,12 +77,24 @@ public class GroupService {
         groupEntity.setFiles(fileToAdd);
         groupRepository.save(groupEntity);
     }
-    public List<FileDto> getGroupFilesList(int groupId){
+
+    public List<FileDto> getGroupFileDtoList(int groupId){
+        return fileEntityToFileDtoConverter.convertList(getGroupFilesList(groupId));
+    }
+
+    private List<FileEntity> getGroupFilesList(int groupId){
         GroupEntity groupEntity = getGroupById(groupId);
-        List<FileDto> filesDto = new ArrayList<>();
-        for(FileEntity file: groupEntity.getFiles()){
-            filesDto.add(fileEntityToFileDtoConverter.convert(file));
+        return groupEntity.getFiles();
+    }
+
+    public List<FileDto> getUsersGroupFilesList(int groupId,int userId){
+        List<FileEntity> groupsFiles = getGroupFilesList(groupId);
+        List<FileEntity> returnList = new ArrayList<>();
+        for(FileEntity f : groupsFiles){
+            if(f.getFileOwner().getUserId() == userId){
+                returnList.add(f);
+            }
         }
-        return filesDto;
+        return fileEntityToFileDtoConverter.convertList(returnList);
     }
 }

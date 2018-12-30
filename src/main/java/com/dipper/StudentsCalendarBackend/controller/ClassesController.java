@@ -1,13 +1,11 @@
 package com.dipper.StudentsCalendarBackend.controller;
 
 import com.dipper.StudentsCalendarBackend.converter.ClassesToClassesDtoConverter;
-import com.dipper.StudentsCalendarBackend.dto.CoursesDto;
 import com.dipper.StudentsCalendarBackend.entity.ClassesEntity;
 import com.dipper.StudentsCalendarBackend.entity.CourseEntity;
 import com.dipper.StudentsCalendarBackend.service.ClassesService;
 import com.dipper.StudentsCalendarBackend.service.CourseService;
 
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -15,12 +13,9 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpOutputMessage;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import javax.validation.constraints.Null;
 
 @CrossOrigin
 @RestController

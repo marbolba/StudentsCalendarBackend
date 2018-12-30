@@ -15,7 +15,6 @@ public class CoursesToCoursesDtoConverter {
         for(ClassesEntity classesEntity: courseEntity.getClasses()){
             classes.add(classesEntity.getClassesId());
         }
-        System.out.println(classes);
         return new CoursesDto(
                 courseEntity.getCourseId(),
                 courseEntity.getCourseOwner().getUserId(),

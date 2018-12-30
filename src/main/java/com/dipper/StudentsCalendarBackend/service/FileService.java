@@ -49,8 +49,13 @@ public class FileService {
         fileRepository.save(fileEntity);
     }
 
-    public List<FileDto> getCoursesFiles(int fileOwnerId, int classesId){
+    public List<FileDto> getClassesFiles(int fileOwnerId, int classesId){
         return fileEntityToFileDtoConverter.convertList(fileRepository.findByFileOwnerAndParentClassesId(new UserEntity(fileOwnerId),new ClassesEntity(classesId)));
+    }
+    public List<FileDto> getCoursesFiles(int coursesId){
+        System.out.println("recieved " + coursesId);
+        System.out.println(fileEntityToFileDtoConverter.convertList(fileRepository.findByParentClassesId(coursesId)));
+        return fileEntityToFileDtoConverter.convertList(fileRepository.findByParentClassesId(coursesId));
     }
     public FileDataDto getFile(int fileId){
         return fileEntityToFileDtoConverter.convertToData(fileRepository.findById(fileId).get());
