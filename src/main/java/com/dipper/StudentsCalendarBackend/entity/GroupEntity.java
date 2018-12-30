@@ -1,5 +1,8 @@
 package com.dipper.StudentsCalendarBackend.entity;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -82,8 +85,13 @@ public class GroupEntity {
         return files;
     }
 
-    public void setFiles(FileEntity files) {
+    public void setFiles(List<FileEntity> files) {
+        this.files = files;
+    }
+
+    public void addFile(FileEntity files) {
         this.files.add(files);
     }
+
 
 }

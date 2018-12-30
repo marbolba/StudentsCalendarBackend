@@ -1,14 +1,19 @@
 package com.dipper.StudentsCalendarBackend.controller;
 
 import com.dipper.StudentsCalendarBackend.service.FileService;
-import com.dipper.StudentsCalendarBackend.service.UserService;
+import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpOutputMessage;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.HttpServletResponse;
+import java.io.File;
+import java.io.FileInputStream;
 
 @RestController
 @CrossOrigin
@@ -38,5 +43,19 @@ public class FileController {
     public ResponseEntity<?> deleteFile(@RequestParam int fileId){
         fileService.deleteFile(fileId);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+    @RequestMapping(value = "/download", method = RequestMethod.GET, params = {"fileId"})
+    public ResponseEntity<?> downloadFile(@RequestParam int fileId, HttpServletResponse response){
+        try {
+            File file = fileService.getFileToDownload(fileId);
+            InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION,
+                            "attachment;filename=" + file.getName())
+                    .contentType(MediaType.APPLICATION_PDF).contentLength(file.length())
+                    .body(resource);
+        }catch (Exception e ){
+            return new ResponseEntity(HttpStatus.NO_CONTENT);
+        }
     }
 }

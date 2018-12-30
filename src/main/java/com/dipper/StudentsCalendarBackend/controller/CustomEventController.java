@@ -1,5 +1,6 @@
 package com.dipper.StudentsCalendarBackend.controller;
 
+import com.dipper.StudentsCalendarBackend.dto.CustomEventDto;
 import com.dipper.StudentsCalendarBackend.dto.CustomEventReceiveDto;
 import com.dipper.StudentsCalendarBackend.entity.CustomEventEntity;
 import com.dipper.StudentsCalendarBackend.entity.UserEntity;
@@ -9,6 +10,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @CrossOrigin
@@ -26,6 +31,24 @@ public class CustomEventController {
 
     @RequestMapping(method = RequestMethod.GET, produces = "application/json")
     ResponseEntity<?> getCustomEvents(@RequestParam int userId, @RequestParam int year, @RequestParam int month, @RequestParam int lastDayOfMonth) {
-        return new ResponseEntity<>(customEventService.getUsersEvents(userId),HttpStatus.OK);
+        List<CustomEventDto> usersEvents = customEventService.getUsersEvents(userId);
+
+        Date dateFrom = null;
+        Date dateTo = null;
+        try {
+            dateFrom = new SimpleDateFormat("yyyy-MM-dd").parse(year + "-" + month + "-01");
+            dateTo = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(year + "-" + month + "-" + lastDayOfMonth + " 23:59");
+
+        } catch (ParseException e) {
+            System.out.println("Could not parse dates");
+        }
+
+        List<CustomEventDto> thisMonthsUsersEvents = new ArrayList<>();
+        for (CustomEventDto customEventDto : usersEvents) {
+            if (customEventDto.getEventDate().after(dateFrom) && customEventDto.getEventDate().before(dateTo)) {
+                thisMonthsUsersEvents.add(customEventDto);
+            }
+        }
+        return new ResponseEntity<>(thisMonthsUsersEvents,HttpStatus.OK);
     }
 }

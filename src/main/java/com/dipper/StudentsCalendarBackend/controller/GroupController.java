@@ -19,10 +19,12 @@ public class GroupController {
     public ResponseEntity<?> addGroup(@RequestBody GroupEntity groupEntity){
         return new ResponseEntity<>(groupService.addGroup(groupEntity), HttpStatus.CREATED);
     }
-    @RequestMapping(value = "/user", method = RequestMethod.POST,consumes = "application/json")
-    public ResponseEntity<?> addUserToGroup(@RequestBody UserEntity userEntity,@RequestParam String groupName){
-        groupService.addUserToGroup(userEntity,groupName);
-        return new ResponseEntity<>(HttpStatus.OK);
+    @RequestMapping(value = "/user", method = RequestMethod.POST, params = {"groupId","userId"})
+    public ResponseEntity<?> addUserToGroup(@RequestParam int groupId,@RequestParam int userId){
+        if(groupService.addUserToGroup(groupId,userId))
+            return new ResponseEntity<>(HttpStatus.OK);
+        else
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
     }
     @RequestMapping(value = "/user", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<?> getUsersGroups(@RequestParam int userId){
@@ -40,5 +42,9 @@ public class GroupController {
     @RequestMapping(method = RequestMethod.GET, produces = "application/json", params = {"groupId","userId"})
     public ResponseEntity<?> getUsersGroupFilesList(@RequestParam int groupId,@RequestParam int userId){
         return new ResponseEntity<>(groupService.getUsersGroupFilesList(groupId,userId),HttpStatus.OK);
+    }
+    @RequestMapping(method = RequestMethod.GET, produces = "application/json", params = {"startsWith"})
+    public ResponseEntity<?> getUsersGroupFilesList(@RequestParam String startsWith){
+        return new ResponseEntity<>(groupService.getGroupsStartsWithList(startsWith),HttpStatus.OK);
     }
 }

@@ -45,6 +45,7 @@ public class ClassesController {
             dateTo = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(year + "-" + month + "-" + lastDayOfMonth + " 23:59");
 
         } catch (ParseException e) {
+            System.out.println("Could not parse dates");
         }
 
         List<ClassesEntity> usersClasses = new ArrayList<>();

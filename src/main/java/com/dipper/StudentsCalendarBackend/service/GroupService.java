@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 @Service
@@ -46,15 +47,26 @@ public class GroupService {
         return groupRepository.save(groupEntity);
     }
 
-    public void addUserToGroup(UserEntity newUser, String groupName){
-        //TODO check if user is already present in group
-        GroupEntity searchedGroup = groupRepository.findByGroupName(groupName);
+    public boolean addUserToGroup(int groupId, int userId){
+        GroupEntity searchedGroup = groupRepository.findById(groupId).get();
+        boolean operationSuccessful = false;
         if(searchedGroup!=null){
-            newUser = userRepository.findById(newUser.getUserId()).get();
-            searchedGroup.setUsers(newUser);
-            groupRepository.save(searchedGroup);
+            boolean found = false;
+            for(UserEntity userEntity: searchedGroup.getUsers()){
+                if(userEntity.getUserId()==userId){
+                    found = true;
+                    break;
+                }
+            }
+            if(!found){
+                searchedGroup.setUsers(userRepository.findById(userId).get());
+                groupRepository.save(searchedGroup);
+                operationSuccessful = true;
+            }else {
+                System.out.println("user already in group!!!");
+            }
         }
-        //TODO ADD ERRORS !!!
+        return operationSuccessful;
     }
 
     public List<GroupDto> getUsersGroups(int userId){
@@ -74,7 +86,15 @@ public class GroupService {
         //TODO CHECK IF ANYTHING FOUND
         FileEntity fileToAdd = fileService.getFileById(fileId);
         GroupEntity groupEntity = getGroupById(groupId);
-        groupEntity.setFiles(fileToAdd);
+        groupEntity.addFile(fileToAdd);
+        groupRepository.save(groupEntity);
+    }
+
+    public void deleteFile(int groupId, int fileId){
+        GroupEntity groupEntity = getGroupById(groupId);
+        List<FileEntity> fileEntityList = groupEntity.getFiles();
+        fileEntityList.removeIf(file -> file.getFileId() == fileId);
+        groupEntity.setFiles(fileEntityList);
         groupRepository.save(groupEntity);
     }
 
@@ -96,5 +116,14 @@ public class GroupService {
             }
         }
         return fileEntityToFileDtoConverter.convertList(returnList);
+    }
+    public List<GroupDto> getGroupsStartsWithList(String startsWith){
+        List<GroupEntity> found = new ArrayList<>();
+        for(GroupEntity group : groupRepository.findAll()){
+            if(group.getGroupName().toLowerCase().startsWith(startsWith.toLowerCase())) {
+                found.add(group);
+            }
+        }
+        return groupEntityToGroupDtoConverter.convertList(found);
     }
 }

@@ -5,25 +5,26 @@ import com.dipper.StudentsCalendarBackend.dto.FileDataDto;
 import com.dipper.StudentsCalendarBackend.dto.FileDto;
 import com.dipper.StudentsCalendarBackend.entity.ClassesEntity;
 import com.dipper.StudentsCalendarBackend.entity.FileEntity;
+import com.dipper.StudentsCalendarBackend.entity.GroupEntity;
 import com.dipper.StudentsCalendarBackend.entity.UserEntity;
 import com.dipper.StudentsCalendarBackend.repository.FileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
 
 @Service
 public class FileService {
-    private FileRepository fileRepository;
-    private FileEntityToFileDtoConverter fileEntityToFileDtoConverter;
-
     @Autowired
-    public FileService(FileRepository fileRepository, FileEntityToFileDtoConverter fileEntityToFileDtoConverter) {
-        this.fileRepository = fileRepository;
-        this.fileEntityToFileDtoConverter = fileEntityToFileDtoConverter;
-    }
+    private FileRepository fileRepository;
+    @Autowired
+    private FileEntityToFileDtoConverter fileEntityToFileDtoConverter;
+    @Autowired
+    private GroupService groupService;
 
     public void saveFile(MultipartFile file, int fileOwnerId, int classesId){
         //prepare data
@@ -61,9 +62,24 @@ public class FileService {
         return fileEntityToFileDtoConverter.convertToData(fileRepository.findById(fileId).get());
     }
     public void deleteFile(int fileId){
+        FileEntity fileEntity = fileRepository.findById(fileId).get();
+        for(GroupEntity groupEntity : fileEntity.getSharedToGroups()){
+            groupService.deleteFile(groupEntity.getGroupId(),fileId);
+        }
         fileRepository.deleteById(fileId);
     }
     public FileEntity getFileById(int fileId){
         return fileRepository.findById(fileId).get();
+    }
+    public File getFileToDownload(int fileId){
+        try {
+            FileEntity fileEntity = getFileById(fileId);
+            File convFile = new File(fileEntity.getFileName());
+            convFile.createNewFile();
+            FileOutputStream fos = new FileOutputStream(convFile);
+            fos.write(fileEntity.getFileBytes());
+            fos.close();
+            return convFile;
+        }catch (Exception e ){return null;}
     }
 }
