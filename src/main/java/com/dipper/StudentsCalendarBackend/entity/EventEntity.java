@@ -1,15 +1,45 @@
-package com.dipper.StudentsCalendarBackend.dto;
+package com.dipper.StudentsCalendarBackend.entity;
 
-import com.dipper.StudentsCalendarBackend.entity.UserEntity;
-
+import javax.persistence.*;
 import java.util.Date;
 
-public class CustomEventReceiveDto {
+@Entity
+@Table(name = "Event")
+public class EventEntity {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "event_id", updatable = false, nullable = false)
+    private int eventId;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "eventOwner", nullable = false)
+    private UserEntity eventOwner;
+
+    @Temporal(TemporalType.DATE)
+    private Date eventDate;
     private String name;
     private String description;
     private String startTime;
     private String endTime;
-    private Date eventDate;
+
+    public EventEntity() {
+    }
+
+    public int getEventId() {
+        return eventId;
+    }
+
+    public void setEventId(int eventId) {
+        this.eventId = eventId;
+    }
+
+    public UserEntity getEventOwner() {
+        return eventOwner;
+    }
+
+    public void setEventOwner(UserEntity eventOwner) {
+        this.eventOwner = eventOwner;
+    }
 
     public String getName() {
         return name;
@@ -53,8 +83,10 @@ public class CustomEventReceiveDto {
 
     @Override
     public String toString() {
-        return "CustomEventReceiveDto{" +
-                "name='" + name + '\'' +
+        return "EventEntity{" +
+                "event_id=" + eventId +
+                ", eventOwner=" + eventOwner +
+                ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", startTime=" + startTime +
                 ", endTime=" + endTime +
