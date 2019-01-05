@@ -2,7 +2,7 @@ package com.dipper.StudentsCalendarBackend.view;
 
 import java.util.Date;
 
-public class EventReceiveDto {
+public class EventReceiveView {
     private String name;
     private String description;
     private String startTime;
@@ -51,7 +51,7 @@ public class EventReceiveDto {
 
     @Override
     public String toString() {
-        return "EventReceiveDto{" +
+        return "EventReceiveView{" +
                 "name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", startTime=" + startTime +

@@ -1,7 +1,7 @@
 package com.dipper.StudentsCalendarBackend.controller;
 
+import com.dipper.StudentsCalendarBackend.view.EventReceiveView;
 import com.dipper.StudentsCalendarBackend.view.EventView;
-import com.dipper.StudentsCalendarBackend.view.EventReceiveDto;
 import com.dipper.StudentsCalendarBackend.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,8 +22,8 @@ public class EventController {
     private EventService eventService;
 
     @RequestMapping(method = RequestMethod.POST, consumes = "application/json")
-    ResponseEntity<?> addCustomEvent(@RequestParam int eventOwnerId,@RequestBody EventReceiveDto eventReceiveDto){
-        eventService.addEvent(eventOwnerId, eventReceiveDto);
+    ResponseEntity<?> addCustomEvent(@RequestParam int eventOwnerId,@RequestBody EventReceiveView eventReceiveView){
+        eventService.addEvent(eventOwnerId, eventReceiveView);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

@@ -2,7 +2,7 @@ package com.dipper.StudentsCalendarBackend.service;
 
 import com.dipper.StudentsCalendarBackend.converter.EventToEventViewConverter;
 import com.dipper.StudentsCalendarBackend.view.EventView;
-import com.dipper.StudentsCalendarBackend.view.EventReceiveDto;
+import com.dipper.StudentsCalendarBackend.view.EventReceiveView;
 import com.dipper.StudentsCalendarBackend.entity.EventEntity;
 import com.dipper.StudentsCalendarBackend.entity.UserEntity;
 import com.dipper.StudentsCalendarBackend.repository.EventRepository;
@@ -18,14 +18,14 @@ public class EventService {
     @Autowired
     private EventToEventViewConverter eventToEventViewConverter;
 
-    public void addEvent(int eventOwnerId, EventReceiveDto eventReceiveDto){
+    public void addEvent(int eventOwnerId, EventReceiveView eventReceiveView){
         EventEntity eventEntity = new EventEntity();
         eventEntity.setEventOwner(new UserEntity(eventOwnerId));
-        eventEntity.setDescription(eventReceiveDto.getDescription());
-        eventEntity.setName(eventReceiveDto.getName());
-        eventEntity.setStartTime(eventReceiveDto.getStartTime());
-        eventEntity.setEndTime(eventReceiveDto.getEndTime());
-        eventEntity.setEventDate(eventReceiveDto.getEventDate());
+        eventEntity.setDescription(eventReceiveView.getDescription());
+        eventEntity.setName(eventReceiveView.getName());
+        eventEntity.setStartTime(eventReceiveView.getStartTime());
+        eventEntity.setEndTime(eventReceiveView.getEndTime());
+        eventEntity.setEventDate(eventReceiveView.getEventDate());
 
         eventRepository.save(eventEntity);
     }
