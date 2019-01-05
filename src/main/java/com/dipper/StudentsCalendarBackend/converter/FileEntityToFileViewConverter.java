@@ -1,7 +1,7 @@
 package com.dipper.StudentsCalendarBackend.converter;
 
-import com.dipper.StudentsCalendarBackend.dto.FileDataDto;
-import com.dipper.StudentsCalendarBackend.dto.FileDto;
+import com.dipper.StudentsCalendarBackend.view.FileDataView;
+import com.dipper.StudentsCalendarBackend.view.FileView;
 import com.dipper.StudentsCalendarBackend.entity.FileEntity;
 import org.springframework.stereotype.Component;
 
@@ -9,9 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class FileEntityToFileDtoConverter {
-    public FileDto convert(FileEntity fileEntity) {
-        return new FileDto(fileEntity.getFileId(),
+public class FileEntityToFileViewConverter {
+    public FileView convert(FileEntity fileEntity) {
+        return new FileView(fileEntity.getFileId(),
                 fileEntity.getParentClassesId().getClassesId(),
                 fileEntity.getFileOwner().getUserId(),
                 fileEntity.getEditDate(),
@@ -20,16 +20,16 @@ public class FileEntityToFileDtoConverter {
                 fileEntity.getFileName());
     }
 
-    public List<FileDto> convertList(List<FileEntity> fileEntityList) {
-        List<FileDto> fileDtos = new ArrayList<>();
+    public List<FileView> convertList(List<FileEntity> fileEntityList) {
+        List<FileView> fileViews = new ArrayList<>();
         for (FileEntity fileEntity : fileEntityList) {
-            fileDtos.add(convert(fileEntity));
+            fileViews.add(convert(fileEntity));
         }
-        return fileDtos;
+        return fileViews;
     }
 
-    public FileDataDto convertToData(FileEntity fileEntity){
-        return new FileDataDto(fileEntity.getFileId(),
+    public FileDataView convertToData(FileEntity fileEntity){
+        return new FileDataView(fileEntity.getFileId(),
                 fileEntity.getFileOwner().getUserId(),
                 fileEntity.getEditDate(),
                 fileEntity.getFileId(),

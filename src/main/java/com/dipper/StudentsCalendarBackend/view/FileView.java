@@ -1,8 +1,8 @@
-package com.dipper.StudentsCalendarBackend.dto;
+package com.dipper.StudentsCalendarBackend.view;
 
 import java.util.Date;
 
-public class FileDto {
+public class FileView {
 
     private int fileId;
     private int parentClassesId;
@@ -13,7 +13,7 @@ public class FileDto {
     private long fileSize;
     private String fileName;
 
-    public FileDto(int fileId, int parentClassesId, int fileOwner, Date editDate, String fileFormat, long fileSize, String fileName) {
+    public FileView(int fileId, int parentClassesId, int fileOwner, Date editDate, String fileFormat, long fileSize, String fileName) {
         this.fileId = fileId;
         this.parentClassesId = parentClassesId;
         this.fileOwner = fileOwner;
@@ -23,7 +23,7 @@ public class FileDto {
         this.fileName = fileName;
     }
 
-    public FileDto() {
+    public FileView() {
     }
 
     public int getFileId() {

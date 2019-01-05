@@ -1,6 +1,6 @@
-package com.dipper.StudentsCalendarBackend.dto;
+package com.dipper.StudentsCalendarBackend.view;
 
-public class UserDto {
+public class UserView {
     private int userId;
     private String userName;
     private String email;
@@ -8,7 +8,7 @@ public class UserDto {
     private String surname;
 
 
-    public UserDto(int userId, String userName, String email, String name, String surname) {
+    public UserView(int userId, String userName, String email, String name, String surname) {
         this.userId = userId;
         this.userName = userName;
         this.email = email;
@@ -58,7 +58,7 @@ public class UserDto {
 
     @Override
     public String toString() {
-        return "UserDto{" +
+        return "UserView{" +
                 "userId='" + userId + '\'' +
                 ", userName='" + userName + '\'' +
                 ", email='" + email + '\'' +

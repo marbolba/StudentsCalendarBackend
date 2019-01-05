@@ -1,8 +1,8 @@
-package com.dipper.StudentsCalendarBackend.dto;
+package com.dipper.StudentsCalendarBackend.view;
 
 import java.util.Date;
 
-public class ClassesDto {
+public class ClassesView {
 
     private int classesId;
     private int parentCourseId;
@@ -11,7 +11,7 @@ public class ClassesDto {
     private Date classesFullStartDate;
     private Date classesFullEndDate;
 
-    public ClassesDto(int classesId, int parentCourseId, String classesName, String classesType, Date classesFullStartDate, Date classesFullEndDate) {
+    public ClassesView(int classesId, int parentCourseId, String classesName, String classesType, Date classesFullStartDate, Date classesFullEndDate) {
         this.classesId = classesId;
         this.parentCourseId = parentCourseId;
         this.classesName = classesName;
@@ -70,7 +70,7 @@ public class ClassesDto {
 
     @Override
     public String toString() {
-        return "ClassesDto{" +
+        return "ClassesView{" +
                 "classesId=" + classesId +
                 ", parentCourseId=" + parentCourseId +
                 ", classesName='" + classesName + '\'' +

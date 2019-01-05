@@ -1,9 +1,9 @@
 package com.dipper.StudentsCalendarBackend.service;
 
-import com.dipper.StudentsCalendarBackend.converter.FileEntityToFileDtoConverter;
-import com.dipper.StudentsCalendarBackend.converter.GroupEntityToGroupDtoConverter;
-import com.dipper.StudentsCalendarBackend.dto.FileDto;
-import com.dipper.StudentsCalendarBackend.dto.GroupDto;
+import com.dipper.StudentsCalendarBackend.converter.FileEntityToFileViewConverter;
+import com.dipper.StudentsCalendarBackend.converter.GroupEntityToGroupViewConverter;
+import com.dipper.StudentsCalendarBackend.view.FileView;
+import com.dipper.StudentsCalendarBackend.view.GroupView;
 import com.dipper.StudentsCalendarBackend.entity.FileEntity;
 import com.dipper.StudentsCalendarBackend.entity.GroupEntity;
 import com.dipper.StudentsCalendarBackend.entity.UserEntity;
@@ -13,28 +13,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 @Service
 public class GroupService {
     private GroupRepository groupRepository;
     private UserRepository userRepository;
-    private GroupEntityToGroupDtoConverter groupEntityToGroupDtoConverter;
+    private GroupEntityToGroupViewConverter groupEntityToGroupViewConverter;
     private FileService fileService;
-    private FileEntityToFileDtoConverter fileEntityToFileDtoConverter;
+    private FileEntityToFileViewConverter fileEntityToFileViewConverter;
 
     @Autowired
     public GroupService(GroupRepository groupRepository,
                         UserRepository userRepository,
-                        GroupEntityToGroupDtoConverter groupEntityToGroupDtoConverter,
+                        GroupEntityToGroupViewConverter groupEntityToGroupViewConverter,
                         FileService fileService,
-                        FileEntityToFileDtoConverter fileEntityToFileDtoConverter) {
+                        FileEntityToFileViewConverter fileEntityToFileViewConverter) {
         this.groupRepository = groupRepository;
         this.userRepository = userRepository;
-        this.groupEntityToGroupDtoConverter = groupEntityToGroupDtoConverter;
+        this.groupEntityToGroupViewConverter = groupEntityToGroupViewConverter;
         this.fileService = fileService;
-        this.fileEntityToFileDtoConverter = fileEntityToFileDtoConverter;
+        this.fileEntityToFileViewConverter = fileEntityToFileViewConverter;
     }
 
     private GroupEntity getGroupById(int groupId){
@@ -69,12 +68,12 @@ public class GroupService {
         return operationSuccessful;
     }
 
-    public List<GroupDto> getUsersGroups(int userId){
-        List<GroupDto> foundGroups = new ArrayList<>();
+    public List<GroupView> getUsersGroups(int userId){
+        List<GroupView> foundGroups = new ArrayList<>();
         for(GroupEntity group : groupRepository.findAll()){
             for(UserEntity user: group.getUsers()){
                 if(user.checkById(userId)){
-                    foundGroups.add(groupEntityToGroupDtoConverter.convert(group));
+                    foundGroups.add(groupEntityToGroupViewConverter.convert(group));
                     break;
                 }
             }
@@ -98,8 +97,8 @@ public class GroupService {
         groupRepository.save(groupEntity);
     }
 
-    public List<FileDto> getGroupFileDtoList(int groupId){
-        return fileEntityToFileDtoConverter.convertList(getGroupFilesList(groupId));
+    public List<FileView> getGroupFileDtoList(int groupId){
+        return fileEntityToFileViewConverter.convertList(getGroupFilesList(groupId));
     }
 
     private List<FileEntity> getGroupFilesList(int groupId){
@@ -107,7 +106,7 @@ public class GroupService {
         return groupEntity.getFiles();
     }
 
-    public List<FileDto> getUsersGroupFilesList(int groupId,int userId){
+    public List<FileView> getUsersGroupFilesList(int groupId, int userId){
         List<FileEntity> groupsFiles = getGroupFilesList(groupId);
         List<FileEntity> returnList = new ArrayList<>();
         for(FileEntity f : groupsFiles){
@@ -115,15 +114,15 @@ public class GroupService {
                 returnList.add(f);
             }
         }
-        return fileEntityToFileDtoConverter.convertList(returnList);
+        return fileEntityToFileViewConverter.convertList(returnList);
     }
-    public List<GroupDto> getGroupsStartsWithList(String startsWith){
+    public List<GroupView> getGroupsStartsWithList(String startsWith){
         List<GroupEntity> found = new ArrayList<>();
         for(GroupEntity group : groupRepository.findAll()){
             if(group.getGroupName().toLowerCase().startsWith(startsWith.toLowerCase())) {
                 found.add(group);
             }
         }
-        return groupEntityToGroupDtoConverter.convertList(found);
+        return groupEntityToGroupViewConverter.convertList(found);
     }
 }

@@ -1,6 +1,6 @@
-package com.dipper.StudentsCalendarBackend.dto;
+package com.dipper.StudentsCalendarBackend.view;
 
-public class GroupDto {
+public class GroupView {
 
     private int groupId;
 
@@ -8,10 +8,10 @@ public class GroupDto {
 
     private String groupDescription;
 
-    public GroupDto() {
+    public GroupView() {
     }
 
-    public GroupDto(int groupId, String groupName, String groupDescription) {
+    public GroupView(int groupId, String groupName, String groupDescription) {
         this.groupId = groupId;
         this.groupName = groupName;
         this.groupDescription = groupDescription;

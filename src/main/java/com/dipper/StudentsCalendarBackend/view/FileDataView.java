@@ -1,8 +1,8 @@
-package com.dipper.StudentsCalendarBackend.dto;
+package com.dipper.StudentsCalendarBackend.view;
 import java.util.Arrays;
 import java.util.Date;
 
-public class FileDataDto {
+public class FileDataView {
 
     private int fileId;
     private int fileOwner;
@@ -14,7 +14,7 @@ public class FileDataDto {
     private long fileSize;
     private String fileName;
 
-    public FileDataDto(int fileId, int fileOwner, Date editDate, int parentClassesId, byte[] fileBytes, String fileFormat, long fileSize, String fileName) {
+    public FileDataView(int fileId, int fileOwner, Date editDate, int parentClassesId, byte[] fileBytes, String fileFormat, long fileSize, String fileName) {
         this.fileId = fileId;
         this.fileOwner = fileOwner;
         this.editDate = editDate;
@@ -91,7 +91,7 @@ public class FileDataDto {
 
     @Override
     public String toString() {
-        return "FileDataDto{" +
+        return "FileDataView{" +
                 "fileId=" + fileId +
                 ", fileOwner=" + fileOwner +
                 ", parentClassesId=" + parentClassesId +

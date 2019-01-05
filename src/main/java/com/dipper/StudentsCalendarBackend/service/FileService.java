@@ -1,8 +1,8 @@
 package com.dipper.StudentsCalendarBackend.service;
 
-import com.dipper.StudentsCalendarBackend.converter.FileEntityToFileDtoConverter;
-import com.dipper.StudentsCalendarBackend.dto.FileDataDto;
-import com.dipper.StudentsCalendarBackend.dto.FileDto;
+import com.dipper.StudentsCalendarBackend.converter.FileEntityToFileViewConverter;
+import com.dipper.StudentsCalendarBackend.view.FileDataView;
+import com.dipper.StudentsCalendarBackend.view.FileView;
 import com.dipper.StudentsCalendarBackend.entity.ClassesEntity;
 import com.dipper.StudentsCalendarBackend.entity.FileEntity;
 import com.dipper.StudentsCalendarBackend.entity.GroupEntity;
@@ -22,7 +22,7 @@ public class FileService {
     @Autowired
     private FileRepository fileRepository;
     @Autowired
-    private FileEntityToFileDtoConverter fileEntityToFileDtoConverter;
+    private FileEntityToFileViewConverter fileEntityToFileViewConverter;
     @Autowired
     private GroupService groupService;
 
@@ -50,16 +50,16 @@ public class FileService {
         fileRepository.save(fileEntity);
     }
 
-    public List<FileDto> getClassesFiles(int fileOwnerId, int classesId){
-        return fileEntityToFileDtoConverter.convertList(fileRepository.findByFileOwnerAndParentClassesId(new UserEntity(fileOwnerId),new ClassesEntity(classesId)));
+    public List<FileView> getClassesFiles(int fileOwnerId, int classesId){
+        return fileEntityToFileViewConverter.convertList(fileRepository.findByFileOwnerAndParentClassesId(new UserEntity(fileOwnerId),new ClassesEntity(classesId)));
     }
-    public List<FileDto> getCoursesFiles(int coursesId){
+    public List<FileView> getCoursesFiles(int coursesId){
         System.out.println("recieved " + coursesId);
-        System.out.println(fileEntityToFileDtoConverter.convertList(fileRepository.findByParentClassesId(coursesId)));
-        return fileEntityToFileDtoConverter.convertList(fileRepository.findByParentClassesId(coursesId));
+        System.out.println(fileEntityToFileViewConverter.convertList(fileRepository.findByParentClassesId(coursesId)));
+        return fileEntityToFileViewConverter.convertList(fileRepository.findByParentClassesId(coursesId));
     }
-    public FileDataDto getFile(int fileId){
-        return fileEntityToFileDtoConverter.convertToData(fileRepository.findById(fileId).get());
+    public FileDataView getFile(int fileId){
+        return fileEntityToFileViewConverter.convertToData(fileRepository.findById(fileId).get());
     }
     public void deleteFile(int fileId){
         FileEntity fileEntity = fileRepository.findById(fileId).get();

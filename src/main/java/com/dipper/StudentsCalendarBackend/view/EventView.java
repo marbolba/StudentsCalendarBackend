@@ -1,8 +1,8 @@
-package com.dipper.StudentsCalendarBackend.dto;
+package com.dipper.StudentsCalendarBackend.view;
 
 import java.util.Date;
 
-public class EventDto {
+public class EventView {
 
     private int customEventId;
     private int eventOwner;
@@ -13,7 +13,7 @@ public class EventDto {
     private String startTime;
     private String endTime;
 
-    public EventDto(int customEventId, int eventOwner, Date eventDate, String name, String description, String startTime, String endTime) {
+    public EventView(int customEventId, int eventOwner, Date eventDate, String name, String description, String startTime, String endTime) {
         this.customEventId = customEventId;
         this.eventOwner = eventOwner;
         this.eventDate = eventDate;

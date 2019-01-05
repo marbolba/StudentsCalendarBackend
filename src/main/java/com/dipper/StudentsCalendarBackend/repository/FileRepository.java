@@ -1,6 +1,5 @@
 package com.dipper.StudentsCalendarBackend.repository;
 
-import com.dipper.StudentsCalendarBackend.dto.FileDto;
 import com.dipper.StudentsCalendarBackend.entity.ClassesEntity;
 import com.dipper.StudentsCalendarBackend.entity.FileEntity;
 import com.dipper.StudentsCalendarBackend.entity.UserEntity;

@@ -1,6 +1,4 @@
-package com.dipper.StudentsCalendarBackend.dto;
-
-import com.dipper.StudentsCalendarBackend.entity.UserEntity;
+package com.dipper.StudentsCalendarBackend.view;
 
 import java.util.Date;
 

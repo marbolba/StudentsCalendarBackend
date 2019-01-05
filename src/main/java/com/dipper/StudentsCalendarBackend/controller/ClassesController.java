@@ -1,6 +1,6 @@
 package com.dipper.StudentsCalendarBackend.controller;
 
-import com.dipper.StudentsCalendarBackend.converter.ClassesToClassesDtoConverter;
+import com.dipper.StudentsCalendarBackend.converter.ClassesToClassesViewConverter;
 import com.dipper.StudentsCalendarBackend.entity.ClassesEntity;
 import com.dipper.StudentsCalendarBackend.entity.CourseEntity;
 import com.dipper.StudentsCalendarBackend.service.ClassesService;
@@ -24,15 +24,15 @@ public class ClassesController {
 
     private CourseService courseService;
     private ClassesService classesService;
-    private ClassesToClassesDtoConverter classesToClassesDtoConverter;
+    private ClassesToClassesViewConverter classesToClassesViewConverter;
 
     @Autowired
     public ClassesController(CourseService courseService,
                              ClassesService classesService,
-                             ClassesToClassesDtoConverter classesToClassesDtoConverter) {
+                             ClassesToClassesViewConverter classesToClassesViewConverter) {
         this.courseService = courseService;
         this.classesService = classesService;
-        this.classesToClassesDtoConverter = classesToClassesDtoConverter;
+        this.classesToClassesViewConverter = classesToClassesViewConverter;
     }
 
     @RequestMapping(method = RequestMethod.GET, produces = "application/json")
@@ -56,6 +56,6 @@ public class ClassesController {
                 }
             }
         }
-        return new ResponseEntity<>(classesToClassesDtoConverter.convertList(usersClasses), HttpStatus.OK);
+        return new ResponseEntity<>(classesToClassesViewConverter.convertList(usersClasses), HttpStatus.OK);
     }
 }

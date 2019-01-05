@@ -1,7 +1,7 @@
 package com.dipper.StudentsCalendarBackend.controller;
 
-import com.dipper.StudentsCalendarBackend.dto.EventDto;
-import com.dipper.StudentsCalendarBackend.dto.EventReceiveDto;
+import com.dipper.StudentsCalendarBackend.view.EventView;
+import com.dipper.StudentsCalendarBackend.view.EventReceiveDto;
 import com.dipper.StudentsCalendarBackend.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,7 +29,7 @@ public class EventController {
 
     @RequestMapping(method = RequestMethod.GET, produces = "application/json")
     ResponseEntity<?> getCustomEvents(@RequestParam int userId, @RequestParam int year, @RequestParam int month, @RequestParam int lastDayOfMonth) {
-        List<EventDto> usersEvents = eventService.getUsersEvents(userId);
+        List<EventView> usersEvents = eventService.getUsersEvents(userId);
 
         Date dateFrom = null;
         Date dateTo = null;
@@ -41,10 +41,10 @@ public class EventController {
             System.out.println("Could not parse dates");
         }
 
-        List<EventDto> thisMonthsUsersEvents = new ArrayList<>();
-        for (EventDto eventDto : usersEvents) {
-            if (eventDto.getEventDate().after(dateFrom) && eventDto.getEventDate().before(dateTo)) {
-                thisMonthsUsersEvents.add(eventDto);
+        List<EventView> thisMonthsUsersEvents = new ArrayList<>();
+        for (EventView eventView : usersEvents) {
+            if (eventView.getEventDate().after(dateFrom) && eventView.getEventDate().before(dateTo)) {
+                thisMonthsUsersEvents.add(eventView);
             }
         }
         return new ResponseEntity<>(thisMonthsUsersEvents,HttpStatus.OK);

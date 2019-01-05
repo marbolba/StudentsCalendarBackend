@@ -1,8 +1,8 @@
 package com.dipper.StudentsCalendarBackend.service;
 
-import com.dipper.StudentsCalendarBackend.converter.EventToEventDtoConverter;
-import com.dipper.StudentsCalendarBackend.dto.EventDto;
-import com.dipper.StudentsCalendarBackend.dto.EventReceiveDto;
+import com.dipper.StudentsCalendarBackend.converter.EventToEventViewConverter;
+import com.dipper.StudentsCalendarBackend.view.EventView;
+import com.dipper.StudentsCalendarBackend.view.EventReceiveDto;
 import com.dipper.StudentsCalendarBackend.entity.EventEntity;
 import com.dipper.StudentsCalendarBackend.entity.UserEntity;
 import com.dipper.StudentsCalendarBackend.repository.EventRepository;
@@ -16,7 +16,7 @@ public class EventService {
     @Autowired
     private EventRepository eventRepository;
     @Autowired
-    private EventToEventDtoConverter eventToEventDtoConverter;
+    private EventToEventViewConverter eventToEventViewConverter;
 
     public void addEvent(int eventOwnerId, EventReceiveDto eventReceiveDto){
         EventEntity eventEntity = new EventEntity();
@@ -30,7 +30,7 @@ public class EventService {
         eventRepository.save(eventEntity);
     }
 
-    public List<EventDto> getUsersEvents(int userId){
-        return eventToEventDtoConverter.convertList(eventRepository.findByEventOwner(new UserEntity(userId)));
+    public List<EventView> getUsersEvents(int userId){
+        return eventToEventViewConverter.convertList(eventRepository.findByEventOwner(new UserEntity(userId)));
     }
 }

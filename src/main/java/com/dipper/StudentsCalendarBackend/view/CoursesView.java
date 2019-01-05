@@ -1,8 +1,8 @@
-package com.dipper.StudentsCalendarBackend.dto;
+package com.dipper.StudentsCalendarBackend.view;
 
 import java.util.List;
 
-public class CoursesDto {
+public class CoursesView {
 
     private int courseId;
 
@@ -17,8 +17,8 @@ public class CoursesDto {
     private String endDate;
     private List<Integer> classes;
 
-    public CoursesDto(int courseId, int courseOwner, String courseName, String courseType, int courseDay,
-                      String startTime, String endTime, String startDate, String endDate, List<Integer> classes) {
+    public CoursesView(int courseId, int courseOwner, String courseName, String courseType, int courseDay,
+                       String startTime, String endTime, String startDate, String endDate, List<Integer> classes) {
         this.courseId = courseId;
         this.courseOwner = courseOwner;
         this.courseName = courseName;
@@ -113,7 +113,7 @@ public class CoursesDto {
 
     @Override
     public String toString() {
-        return "CoursesDto{" +
+        return "CoursesView{" +
                 "courseId=" + courseId +
                 ", courseOwner=" + courseOwner +
                 ", courseName='" + courseName + '\'' +
